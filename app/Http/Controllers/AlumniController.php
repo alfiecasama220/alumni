@@ -1,0 +1,146 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
+use App\Models\Course;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class AlumniController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $course = Course::all();
+        return view('users.pages.register', compact('course'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+        $alumni = User::with('course')->where('role', 'client')->paginate(7);
+        return view('admin.pages.alumni-list', compact('alumni'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'middlename' => 'nullable',
+            'lastname' => 'required',
+            'gender' => 'required',
+            'batch' => 'required',
+            'course' => 'required',
+            'currently' => 'required',
+            'avatar' => 'required|file|max:7020',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+        ]);
+
+
+        if($validator->passes()) {
+            $alumni = new User();
+
+            $path = $request->file('avatar')->store('avatar', 'public');
+
+            $alumni->firstname = $request->firstname;
+            $alumni->middlename = $request->middlename;
+            $alumni->lastname = $request->lastname;
+            $alumni->gender = $request->gender;
+            $alumni->batch = $request->batch;
+            $alumni->course_id = $request->course;
+            $alumni->connected_to = $request->currently;
+            $alumni->avatar = $path;
+            $alumni->email = $request->email;
+            $alumni->role = "client";
+            $alumni->password = $request->password;
+
+            $alumni->save();
+
+            return redirect()->intended(route('alumniLogin'))->with('success', Session::get('registerSuccess'));
+            
+        } else {
+            return redirect()->back()->with('error', "Failed, your data is not added");
+        }
+    }
+
+    public function login() {
+        return view('users.pages.login');
+    }
+
+    public function loginPost(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if($validator->passes()) {
+                if(Auth::user()->status == false) {
+                    return redirect()->back()->with('error', 'Your account is not yet verified.');
+                } else {
+                    Session(['username'=>Auth::user()->firstname]);
+
+                    return redirect()->intended(route('index'));
+                } 
+            } else {
+                return redirect()->back()->with('error', 'Invalid Email or Password');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Invalid Email or Password');
+        }
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        // 
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+
+    public function logout() {
+        Session::flush();
+        Auth::logout();
+
+        return redirect()->intended(route('alumniLogin'))->with('success', "You have been logged out");
+    }
+}
