@@ -17,6 +17,11 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // return view('admin.index');
+    }
+
+    public function login()
+    {
         return view('admin.index');
     }
 
@@ -31,7 +36,7 @@ class AdminController extends Controller
                 Session(['name'=>Auth::user()->name]);
                 return redirect()->intended(route('dashboard.index'));
             } else {
-                return "false";
+                return redirect()->back()->with('error', 'Invalid Email or Password');
             }
         } else {
             return "false";
@@ -111,6 +116,6 @@ class AdminController extends Controller
         Session::flush();
         Auth::logout();
 
-        return redirect()->intended(route('admin.index'))->with('success', Session::get('logoutSuccess'));
+        return redirect()->intended(route('login'))->with('success', Session::get('logoutSuccess'));
     }
 }

@@ -25,7 +25,10 @@
                   setTimeout();
                 </script>
               @elseif(session('error'))
-                <div class="mb-3 bg-success p-4 d-flex align-items-center"><h4 class="text-black">{{ session('error') }}</h4></div>
+                <div id="message" class="mb-3 bg-danger p-4 d-flex align-items-center"><h4 class="text-black">{{ session('error') }}</h4></div>
+                <script>
+                  setTimeout();
+              </script>
               @endif
 
               <h4 class="card-title">Course Form</h4>

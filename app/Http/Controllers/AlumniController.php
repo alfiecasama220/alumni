@@ -43,6 +43,7 @@ class AlumniController extends Controller
             'lastname' => 'required',
             'gender' => 'required',
             'batch' => 'required',
+            'occupation' => 'required',
             'course' => 'required',
             'currently' => 'required',
             'avatar' => 'required|file|max:7020',
@@ -61,6 +62,7 @@ class AlumniController extends Controller
             $alumni->lastname = $request->lastname;
             $alumni->gender = $request->gender;
             $alumni->batch = $request->batch;
+            $alumni->occupation = $request->occupation;
             $alumni->course_id = $request->course;
             $alumni->connected_to = $request->currently;
             $alumni->avatar = $path;
@@ -89,18 +91,50 @@ class AlumniController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if($validator->passes()) {
-                if(Auth::user()->status == false) {
+                if(Auth::user()->status == 0) {
                     return redirect()->back()->with('error', 'Your account is not yet verified.');
-                } else {
+                } else if(Auth::user()->status == 1) {
                     Session(['username'=>Auth::user()->firstname]);
 
                     return redirect()->intended(route('index'));
-                } 
+                } else {
+                    return redirect()->back()->with('error', 'Your account is rejected.');
+                }
             } else {
                 return redirect()->back()->with('error', 'Invalid Email or Password');
             }
         } else {
             return redirect()->back()->with('error', 'Invalid Email or Password');
+        }
+    }
+
+    public function approve(Request $request , string $id) {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required',
+        ]);
+
+        if($validator->passes()) {
+            $user = User::findOrFail($id);
+
+            if($request->status == 1) {
+                
+                $user->status = $request->status;
+                $user->save();
+
+                return redirect()->back()->with('success', Session::get('approveSuccess'));
+            } 
+
+            else if($request->status == 2) {
+                $user->status = $request->status;
+                $user->save();
+
+                return redirect()->back()->with('success', Session::get('rejectSuccess'));
+            } else {
+                return redirect()->back()->with('error', Session::get('approvalFailed'));
+            }
+
+        } else {
+
         }
     }
 

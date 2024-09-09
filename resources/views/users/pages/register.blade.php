@@ -18,6 +18,11 @@
             </div>
             <hr>
             <p class="text-gray">Don't have an Account? Register Now.</p>
+            @if (session('success'))
+                <h5 class="text-success">{{ session('success') }}</h5>
+            @elseif(session('error') || $errors->has('email'))
+                <h5 class="text-danger">{{ session('error') ?: $errors->first('email') }}</h5>                        
+            @endif
             <div class="row">
               <div class="form-group col-md-12">
                 <label>First name</label>
@@ -42,6 +47,11 @@
               <div class="form-group col-md-6">
                 <label for="yearPicker">Batch Year</label>
                 <input type="text" name="batch" class="form-control" id="yearPicker" placeholder="YYYY">
+              </div>
+
+              <div class="form-group col-md-12">
+                <label>Occupation</label>
+                <input name="occupation" class="form-control" type="text">
               </div>
 
               <div class="form-group col-md-12">

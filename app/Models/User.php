@@ -17,6 +17,9 @@ class User extends Authenticatable
         return $this->belongsTo(Course::class, 'course_id');
     }
 
+    protected $approve = "1";
+    protected $reject = "2";
+
     /**
      * The attributes that are mass assignable.
      *

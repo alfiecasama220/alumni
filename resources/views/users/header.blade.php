@@ -50,14 +50,15 @@
                       </li>
                     
                     
-                  
-                    <li class="menu-item"><a href="javascript:void(0)">Event Jobs</a>
-                      <ul class="dropdown">
-      
-                        <li><a href="news-timeline.html">Jobs</a></li>
-                        <li><a href="news-timeline.html">Forums</a></li>
-                      </ul>
-                    </li>
+                    @if(session('username'))
+                      <li class="menu-item"><a href="javascript:void(0)">Event Jobs</a>
+                        <ul class="dropdown">
+        
+                          <li><a href="news-timeline.html">Jobs</a></li>
+                          <li><a href="news-timeline.html">Forums</a></li>
+                        </ul>
+                      </li>
+                    @endif
 
                     <li class="menu-item">
                         <a href="#">About</a>

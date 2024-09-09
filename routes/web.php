@@ -7,12 +7,13 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\EventController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 Route::resource('/admin', AdminController::class);
+Route::get('/auth/admin', [AdminController::class, 'login'])->name('login');
 Route::post('/adminLogin', [AdminController::class, 'adminLogin'])->name('adminLogin');
 
 // Dashboard
@@ -28,11 +29,21 @@ Route::middleware('auth')->group(function () {
     
     // ALUMNI LIST
     Route::resource('/admin/pages/alumni', AlumniController::class);
+
+    // ALUMNI LIST APPROVAL
+    Route::patch('/admin/pages/alumni/alumni-approve/{id}', [AlumniController::class, 'approve'])->name('approve');
+    // Route::patch('/admin/pages/alumni/alumni-reject/{id}', [AlumniController::class, 'reject'])->name('reject');
+
+    // EVENT
+    Route::resource('/admin/pages/event', EventController::class);
 });
 
 // USERS
 
 Route::resource('/', ClientController::class);
+
+// EVENT DETAILS
+Route::get('/event-details/{id}', [ClientController::class, 'show'])->name('eventDetails');
 
 // ALUMNI
 Route::resource('/alumni/register', AlumniController::class);

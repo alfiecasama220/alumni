@@ -14,11 +14,11 @@
         <form action="{{ route('loginPost') }}" method="POST" name="login-form" class="clearfix">
           @csrf
 
-          @if (session('success'))
-                        <h5 class="text-success">{{ session('success') }}</h5>
-                    @elseif(session('error') || $errors->has('email'))
-                        <h5 class="text-danger">{{ session('error') ?: $errors->first('email') }}</h5>                        
-                    @endif
+            @if (session('success'))
+                <h5 class="text-success">{{ session('success') }}</h5>
+            @elseif(session('error') || $errors->has('email'))
+                <h5 class="text-danger">{{ session('error') ?: $errors->first('email') }}</h5>                        
+            @endif
           <div class="row">
             <div class="form-group col-md-12">
               <label for="form_username_email">Username/Email</label>

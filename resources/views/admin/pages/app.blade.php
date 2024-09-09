@@ -22,7 +22,10 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
+    <link rel="icon" href="{{ asset('users/images/icon.png') }}" type="image/x-icon"  >
+    <!-- Popperjs -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'>v 
   </head>
   <body>
     <div class="container-scroller">
@@ -67,7 +70,36 @@
     <script src="{{ asset('assets/js/proBanner.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script>
+    <script>
+      if (/Mobi/.test(navigator.userAgent)) {
+  // if mobile device, use native pickers
+  $(".date input").attr("type", "date");
+  $(".time input").attr("type", "time");
+} else {
+  // if desktop device, use DateTimePicker
+  $("#datepicker").datetimepicker({
+    useCurrent: false,
+    format: "DD-MMM-YYYY",
+    showTodayButton: true,
+    icons: {
+      next: "fa fa-chevron-right",
+      previous: "fa fa-chevron-left",
+      today: 'todayText',
+    }
+  });
+  $("#timepicker").datetimepicker({
+    format: "LT",
+    icons: {
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down"
+    }
+  });
+}
+    </script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
           // Retrieve the saved theme from localStorage
@@ -89,9 +121,13 @@
   </script>
 
   <script>
-    setTimeout(function () {
-      document.querySelector('#message').setAttribute('class', 'd-none');         
-     }, 3000)
+    let message = document.querySelector('#message');
+
+    setTimeout(() => {
+        message.setAttribute('class', 'd-none');
+    }, 3000);
+    
   </script>
+
   </body>
 </html>

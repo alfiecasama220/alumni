@@ -14,7 +14,7 @@
             </div>
             <div class="profile-name">
               <h5 class="mb-0 font-weight-normal text-light">{{ Str::ucfirst(Auth::user()->firstname)}}</h5>
-              <span class="text-center ">{{  Str::ucfirst(Auth::user()->role) }}</span>
+              <span class="text-center w">{{  Str::ucfirst(Auth::user()->role) }}</span>
             </div>
           </div>
           <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -102,7 +102,7 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/icons/font-awesome.html">
+        <a class="nav-link" href="{{ route('event.index') }}">
           <span class="menu-icon">
             <i class="mdi mdi-google-circles-extended"></i>
           </span>

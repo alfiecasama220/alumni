@@ -17,13 +17,17 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/owl-carousel-2/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
 
+
+    <!-- Tempus Dominus Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tempus-dominus/6.0.0-beta4/css/tempus-dominus.min.css" rel="stylesheet" />
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('users/images/icon.png') }}" />
   </head>
   <body>
     <div class="container-scroller">
@@ -46,6 +50,8 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
+    <!-- Tempus Dominus Stylesheet -->
+
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
@@ -68,5 +74,30 @@
     <script src="{{ asset('assets/js/proBanner.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
+
+     <!-- Tempus Dominus JS and Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempus-dominus/6.0.0-beta4/js/tempus-dominus.min.js"></script>
+
+    <!-- Bootstrap JS (optional, for styling) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const picker = new tempusDominus.TempusDominus(document.getElementById('datetimepickerExample'), {
+          display: {
+            components: {
+              calendar: true,
+              date: true,
+              month: true,
+              year: true,
+              hours: true,
+              minutes: true,
+              seconds: true
+            },
+          }
+        });
+      });
+    </script>
+    
   </body>
 </html>
