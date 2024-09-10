@@ -66,6 +66,10 @@
                         <p class="mb-10"><span class="d-inline-block text-truncate" style="max-width: 650px;">
                           {{ $event->description }}
                         </span></p>
+                        <div class="entry-meta mt-0">
+                          {{-- <span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-calendar-alt mr-10 text-theme-colored"></i> Jul 20, 2019</span> --}}
+                          <span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-comments mr-10 text-theme-colored"></i> 214 Comments</span>
+                        </div>
                         <a class="text-theme-colored2" href="{{ route('eventDetails', $event->id) }}">Read More →</a>
                         </div>
                     </div>

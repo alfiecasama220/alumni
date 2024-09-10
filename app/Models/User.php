@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Course;
+use App\Models\EventsComment;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,14 @@ class User extends Authenticatable
     public function course() {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public function eventsComment() {
+        return $this->hasmany(EventsComment::class);
+    }
+
+    // public function comments() {
+    //     return $this->belongsTo(EventsComment::class, 'event_id');
+    // }
 
     protected $approve = "1";
     protected $reject = "2";

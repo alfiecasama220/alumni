@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Gallery;
-use App\Models\User;
-use App\Models\Event;
 use App\Models\EventsComment;
 
-class ClientController extends Controller
+use Illuminate\Http\Request;
+
+class EventCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $gallery = Gallery::all();
-        $alumni = User::with('course')->get()->where('role', 'client')->where('status', 1);
-        $events = Event::where(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"), '>=' , DB::raw('CURDATE()'))->orderBy(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"))->paginate(7);
-        return view('users.index', compact('gallery' , 'alumni', 'events'));
+        //
     }
 
     /**
@@ -37,7 +34,24 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required',
+            'comments' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        if($validator->passes()) {
+            $comments = new EventsComment();
+
+            $comments->event_id = $request->event_id;
+            $comments->comments = $request->comments;
+            $comments->user_id = $request->user_id;
+            $comments->save();
+
+            return redirect()->back()->with('success', "Comment added");
+        } else {
+            return redirect()->back()->with('eroor', "Comment not added");
+        }
     }
 
     /**
@@ -45,11 +59,7 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        $events = Event::findOrFail($id);
-        $eventsComment = EventsComment::with('user')->where('event_id', $id)->paginate(7);
-        if($events) {
-            return view('users.pages.event-details', compact('events', 'eventsComment'));
-        }    
+        //
     }
 
     /**

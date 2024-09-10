@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventCommentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -42,8 +43,17 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('/', ClientController::class);
 
+Route::middleware('userAuth')->group(function () {
+    // EVENT COMMENTS
+    Route::resource('event-details/comments', EventCommentController::class);
+});
+
 // EVENT DETAILS
 Route::get('/event-details/{id}', [ClientController::class, 'show'])->name('eventDetails');
+
+
+
+
 
 // ALUMNI
 Route::resource('/alumni/register', AlumniController::class);
