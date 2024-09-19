@@ -45,7 +45,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="#">Alumni's</a>
+                        <a href="{{ route('showAlumnis') }}">Alumni's</a>
     
                       </li>
                     
@@ -55,13 +55,13 @@
                         <ul class="dropdown">
         
                           <li><a href="news-timeline.html">Jobs</a></li>
-                          <li><a href="news-timeline.html">Forums</a></li>
+                          <li><a href="{{ route('forums.index') }}">Forums</a></li>
                         </ul>
                       </li>
                     @endif
 
                     <li class="menu-item">
-                        <a href="#">About</a>
+                        <a href="{{ route('about') }}">About</a>
     
                       </li>
 

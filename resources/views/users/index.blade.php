@@ -68,7 +68,7 @@
                         </span></p>
                         <div class="entry-meta mt-0">
                           {{-- <span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-calendar-alt mr-10 text-theme-colored"></i> Jul 20, 2019</span> --}}
-                          <span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-comments mr-10 text-theme-colored"></i> 214 Comments</span>
+                          <span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-comments mr-10 text-theme-colored"></i> {{ $eventsComment->where('event_id', $event->id)->count() }} Comments</span>
                         </div>
                         <a class="text-theme-colored2" href="{{ route('eventDetails', $event->id) }}">Read More →</a>
                         </div>
@@ -143,7 +143,7 @@
                             <div class="icons-holder icons-holder-middle">
                               <div class="icons-holder-inner">
                                 <ul class="styled-icons icon-theme-colored1 icon-circled icon-xl">
-                                  <li><a class="styled-icons-item" target="_blank" href="#"><i class="fa fa-link"></i></a></li>
+                                  <li><a class="styled-icons-item" target="_blank" href="{{ route('alumni.show', $alumnis->id) }}"><i class="fa fa-link"></i></a></li>
                                 </ul>
                               </div>
                             </div>

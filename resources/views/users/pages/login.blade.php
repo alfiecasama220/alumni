@@ -1,6 +1,6 @@
 @extends('users.app')
 
-@section('title', 'Home')
+@section('title', 'Login')
 
 @section('content')
 

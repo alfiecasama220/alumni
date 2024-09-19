@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Http\Requests\AdminRequest;
@@ -32,12 +33,23 @@ class AdminController extends Controller
         ]); 
 
         if($validator->passes()) {
+            
+            $admin = DB::table('users')->where('role', 'admin');
+
             if(Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
-                Session(['name'=>Auth::user()->name]);
-                return redirect()->intended(route('dashboard.index'));
+                if(Auth::user()->role == 'admin') {
+                    Session(['name'=>Auth::user()->name]);
+                    return redirect()->intended(route('dashboard.index'));
+                } else {
+                    return redirect()->back()->with('error', 'You are not authorized');
+                }
+                
             } else {
                 return redirect()->back()->with('error', 'Invalid Email or Password');
             }
+          
+            
+
         } else {
             return "false";
         }

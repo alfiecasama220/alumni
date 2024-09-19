@@ -89,12 +89,12 @@
           <div class="row pt-20 pb-20">
             <div class="col-sm-6">
               <div class="footer-paragraph">
-                © 2020 ThemeMascot. All Rights Reserved.
+                © {{ date('Y') }} Metro Dumguete College Alumni. All Rights Reserved.
               </div>
             </div>
             <div class="col-sm-6">
               <div class="footer-paragraph text-right">
-                Site Template
+                {{-- name here --}}
               </div>
             </div>
           </div>

@@ -21,7 +21,8 @@ class ClientController extends Controller
         $gallery = Gallery::all();
         $alumni = User::with('course')->get()->where('role', 'client')->where('status', 1);
         $events = Event::where(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"), '>=' , DB::raw('CURDATE()'))->orderBy(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"))->paginate(7);
-        return view('users.index', compact('gallery' , 'alumni', 'events'));
+        $eventsComment = EventsComment::all();
+        return view('users.index', compact('gallery' , 'alumni', 'events', 'eventsComment'));
     }
 
     /**

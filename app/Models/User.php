@@ -22,6 +22,10 @@ class User extends Authenticatable
         return $this->hasmany(EventsComment::class);
     }
 
+    public function forumComment() {
+        return $this->hasMany(ForumComment::class);
+    }
+
     // public function comments() {
     //     return $this->belongsTo(EventsComment::class, 'event_id');
     // }

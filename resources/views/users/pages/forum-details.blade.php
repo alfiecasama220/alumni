@@ -1,6 +1,6 @@
 @extends('users.app')
 
-@section('title', 'Event Details')
+@section('title', 'Home')
 
 @section('content')
 
@@ -8,49 +8,16 @@
 <div class="main-content-area">
 
     
-  <section>
+  <section class="bg-lighter">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <ul class="list-style-none">
-            <li>
-              <h5>Topics:</h5>
-               {{ $events->title }}
-            </li>
-            <li>
-              <h5>Start Date:</h5>
-              {{ str_replace("-", " ", $events->date) }}
-            </li>
-            <li>
-              <h5>Time:</h5>
-              {{ $events->time }}
-            </li>
-            {{-- <li>
-              <h5>Share:</h5>
-              <div class="styled-icons icon-sm icon-gray icon-circled">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-google-plus"></i></a>
-              </div>
-            </li> --}}
-          </ul>
-        </div>
-        <div class="col-md-8">
-          <img src="{{ url('/storage/', $events->banner) }}" alt="">
-        </div>
-      </div>
-      <div class="row mt-60">
         <div class="col-md-12">
-          <h4 class="mt-0">Event Description</h4>
-          <p>{{ $events->description }}</p>
+          {{-- <img class="pull-left flip mr-15 thumbnail" src="http://placehold.it/430x240" alt="">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+          <div class="clearfix"></div> --}}
+          <h5>{{ $details->title }}</h5>
+          <p>{{ $details->description }}</p>
         </div>
-        {{-- <div class="col-md-6">
-          <blockquote>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-          </blockquote>
-        </div> --}}
       </div>
 
       <div class="row mt-60">
@@ -62,7 +29,7 @@
       
       <div class="col-md-7" >
 
-        @foreach($eventsComment as $comments)
+        @foreach($forumComments as $comments)
           <div class="border-4px border-radius-6 mb-md-40 p-15 mt-4" id="comment{{ $comments->id }}">
             <div class="author-thumb d-flex align-items-center">
               <div class="mr-3" style="width: 62px; height:62px; border-radius: 50%">
@@ -92,10 +59,10 @@
         @endif
         
         <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Comment here</h4>
-        <form class="quick-contact-form" action="{{ route('comments.store') }}" method="POST">
+        <form class="quick-contact-form" action="{{ route('forum-comments.store') }}" method="POST">
           @csrf
           <div class="form-group">
-            <input type="hidden" name="event_id" value="{{ $events->id }}">
+            <input type="hidden" name="forum_id" value="{{ $details->id }}">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
             <textarea class="form-control" name="comments" placeholder="Enter comment" rows="3" required></textarea>
           </div>
@@ -111,10 +78,12 @@
       @endif
       
     </div>
-</div>
+
+    </div>
+
     
+
   </section>
-  
 
 
 </div>

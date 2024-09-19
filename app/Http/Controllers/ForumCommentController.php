@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\EventsComment;
+use App\Models\ForumComment;
 
 use Illuminate\Http\Request;
 
-class EventCommentController extends Controller
+class ForumCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,34 +34,33 @@ class EventCommentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'event_id' => 'required',
+        $Validator = Validator::make($request->all(), [
+            'forum_id' => 'required',
             'comments' => 'required',
             'user_id' => 'required',
         ]);
 
-        if($validator->passes()) {
-            $comments = new EventsComment();
+        if($Validator->passes()) {
+            $forumComment = new ForumComment();
 
-            $comments->event_id = $request->event_id;
-            $comments->comments = $request->comments;
-            $comments->user_id = $request->user_id;
-            $comments->save();
+            $forumComment->forum_id = $request->forum_id;
+            $forumComment->comments = $request->comments;
+            $forumComment->user_id = $request->user_id;
+            $forumComment->save();
 
-            $url = route('eventDetails', $request->event_id);
-
-            $commentsID = EventsComment::all()->where('user_id', $request->user_id);
-            foreach($commentsID as $commentID) {
-                $commentID->id;
+            $commentID = ForumComment::all()->where('user_id', $request->user_id);
+            foreach($commentID as $comID) {
+                $comID->id;
             }
+            $url = route('forums.show' , $request->forum_id);
 
-            return redirect($url . '/#comment' . $commentID->id)->with('success', "Comment added");
+            return redirect($url . "/#comment" . $comID->id)->with('success', "Comment added");
         } else {
-            return redirect()->back()->with('eroor', "Comment not added");
+
         }
     }
 
-    /** 
+    /**
      * Display the specified resource.
      */
     public function show(string $id)

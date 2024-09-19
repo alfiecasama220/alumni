@@ -7,18 +7,19 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\EventsComment;
-
+use App\Models\Forum;
+use App\Models\ForumComment;
 use Illuminate\Http\Request;
 
-class EventCommentController extends Controller
+class ForumController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $forums = Forum::all();
+        return view('users.pages.forum-list', compact('forums'));
     }
 
     /**
@@ -35,38 +36,33 @@ class EventCommentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'event_id' => 'required',
-            'comments' => 'required',
-            'user_id' => 'required',
+            'title' => 'required',
+            'description' => 'required'
         ]);
 
         if($validator->passes()) {
-            $comments = new EventsComment();
+            $forum = new Forum();
 
-            $comments->event_id = $request->event_id;
-            $comments->comments = $request->comments;
-            $comments->user_id = $request->user_id;
-            $comments->save();
+            $forum->title = $request->title;
+            $forum->description = $request->description;
+            $forum->save();
 
-            $url = route('eventDetails', $request->event_id);
-
-            $commentsID = EventsComment::all()->where('user_id', $request->user_id);
-            foreach($commentsID as $commentID) {
-                $commentID->id;
-            }
-
-            return redirect($url . '/#comment' . $commentID->id)->with('success', "Comment added");
-        } else {
-            return redirect()->back()->with('eroor', "Comment not added");
+            return redirect()->back()->with('success', "Forum added");
         }
     }
 
-    /** 
+    /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $forumDetails = Forum::all()->where('id', $id);
+        foreach($forumDetails as $details) {
+            $details;
+        }
+
+        $forumComments = ForumComment::with('user')->where('forum_id', $id)->get();
+        return view('users.pages.forum-details', compact('details', 'forumComments'));
     }
 
     /**

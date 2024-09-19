@@ -138,13 +138,22 @@ class AlumniController extends Controller
         }
     }
 
+    public function showAlumnis() {
+        $alumnis = User::with('course')->where('role', 'client')->where('status', '1')->paginate(7);
+        return view('users.pages.alumnis', compact('alumnis'));
+    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        // 
+        $details = User::with('course')->where('id', $id)->get();
+        foreach($details as $detail) {
+            $detail;
+        }
+        return view('users.pages.alumni-details', compact('detail'));
     }
 
     /**

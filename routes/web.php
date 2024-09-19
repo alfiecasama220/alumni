@@ -9,6 +9,9 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventCommentController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ForumCommentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -46,6 +49,12 @@ Route::resource('/', ClientController::class);
 Route::middleware('userAuth')->group(function () {
     // EVENT COMMENTS
     Route::resource('event-details/comments', EventCommentController::class);
+
+    // FORUM LIST
+    Route::resource('/forums', ForumController::class);
+
+    // FORUM COMMENTS
+    Route::resource('forums/forum-comments', ForumCommentController::class);
 });
 
 // EVENT DETAILS
@@ -53,7 +62,14 @@ Route::get('/event-details/{id}', [ClientController::class, 'show'])->name('even
 
 
 
+// ALUMNI PAGE VIEW
+Route::get('/alumni-list', [AlumniController::class, 'showAlumnis'])->name('showAlumnis');
 
+// ALUMNI PAGE VIEW
+Route::get('/alumni-details/{id}', [AlumniController::class, 'show'])->name('alumniDetails');
+
+// ABOUT
+Route::get('/about', [AboutController::class , 'about'])->name('about');
 
 // ALUMNI
 Route::resource('/alumni/register', AlumniController::class);
