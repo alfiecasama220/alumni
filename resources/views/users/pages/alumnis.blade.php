@@ -35,7 +35,7 @@
                               <div class="icons-holder icons-holder-middle">
                                 <div class="icons-holder-inner">
                                   <ul class="styled-icons icon-theme-colored1 icon-circled icon-xl">
-                                    <li><a class="styled-icons-item" target="_blank" href="{{ route('alumniDetails', $alumni->id) }}"><i class="fa fa-link"></i></a></li>
+                                    <li><a class="styled-icons-item" href="{{ route('alumniDetails', $alumni->id) }}"><i class="fa fa-link"></i></a></li>
                                   </ul>
                                 </div>
                               </div>

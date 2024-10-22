@@ -30,7 +30,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label>Middle name</label>
-                <input name="middlename" class="form-control" type="text">
+                <input name="middlename" class="form-control" type="text" placeholder="Leave it blank if not applicable">
               </div>
               <div class="form-group col-md-6">
                 <label>Last name</label>
@@ -100,13 +100,30 @@
                 <input id="form_choose_password" name="password" class="form-control" type="text">
               </div>
             </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="dataCheck">
+              <label class="form-check-label" for="exampleCheck1">By checking this, you agree to our Data Privacy Policy.</label>
+            </div>
             <div class="form-group tm-sc-button">
-              <button class="btn btn-dark btn-block mt-15" type="submit">Register Now</button>
+              <button id="subButton" class="btn btn-dark btn-block mt-15" type="submit" disabled>Register Now</button>
             </div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    let dataCheck = document.getElementById('dataCheck');
+    let subButton = document.getElementById('subButton');
+
+    dataCheck.addEventListener('click', function () {
+      if(dataCheck.checked) {
+        subButton.disabled = false;
+      } else {
+        subButton.disabled = true;
+      }
+    });
+  </script>
 
 @endsection

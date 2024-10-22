@@ -8,7 +8,7 @@
               <div class="thumb">
                 <img alt="Logo" src="{{ asset('users/images/mdc-wide-white.png') }}">
               </div>
-              <div class="description">203, Envato Labs, Behind Alis Steet, Melbourne, Australia.immersion along the information close the loop on focusing</div>
+              <div class="description">Envision being a school of choice in 2030</div>
             </div>
             <ul class="styled-icons icon-dark icon-theme-colored1 icon-rounded clearfix">
               <li><a class="social-link" href="#" ><i class="fab fa-facebook"></i></a></li>
@@ -53,22 +53,37 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget widget_nav_menu">
-              <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Services</h4>
-              <ul>
+              <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Contact Details</h4>
+              {{-- <ul>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Attorneys</a></li>
                 <li><a href="#">Practice Arears</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Contact</a></li>
+              </ul> --}}
+              <ul class="mt-5">
+                <li class="m-0 pl-0 pr-10"> <i class="fa fa-phone text-theme-colored mr-5"></i> <a class="text-gray" href="#">+440-98-5298</a> </li>
+                <li class="m-0 pl-0 pr-10"> <i class="fa fa-envelope text-theme-colored mr-5"></i> <a class="text-gray" href="#">info@mdci.edu.ph</a> </li>
+                <li class="m-0 pl-0 pr-10"> <i class="fa fa-globe text-theme-colored mr-5"></i> <a class="text-gray" href="https://mdci.edu.ph/">www.mdci.edu.ph</a> </li>
               </ul>
             </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget">
-              <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Opening Hours</h4>
+              {{-- <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Opening Hours</h4> --}}
               <div class="opening-hours border-dark">
-                <ul>
+                <ul class="list-border">
+                  <li><a href="{{ route('index') }}">Home</a></li>
+                  
+                  @if(auth()->check())
+                    <li><a href="{{ route('showAlumnis') }}">Alumni's</a></li>
+                    <li><a href="shortcode-sitemap.html">Jobs</a></li>
+                    <li><a href="{{ route('forums.index') }}">Forums</a></li>
+                  @endif
+                  <li><a href="{{ route('about') }}">About</a></li>
+                </ul>
+                {{-- <ul>
                   <li class="clearfix"> <span> Friday - Saturday :  </span>
                     <div class="value pull-right flip"> 10.00 am - 6.00 pm </div>
                   </li>
@@ -78,7 +93,7 @@
                   <li class="clearfix"> <span> Sunday : </span>
                     <div class="value pull-right flip"> Closed </div>
                   </li>
-                </ul>
+                </ul> --}}
               </div>
             </div>
           </div>

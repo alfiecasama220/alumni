@@ -55,6 +55,9 @@ Route::middleware('userAuth')->group(function () {
 
     // FORUM COMMENTS
     Route::resource('forums/forum-comments', ForumCommentController::class);
+
+    // ALUMNI LIST USER
+    Route::get('/pages/alumni/{id}', [AlumniController::class, 'show'])->name('alumniDetails');
 });
 
 // EVENT DETAILS

@@ -11,15 +11,15 @@
   <section>
     <div class="container">
       <div class="section-content">
-        <div class="row">
-          <div class="col-lg-3">
+        <div class="row col-md-12">
+          <div class="col-lg-5 col-md-5">
             <div class="sidebar">
               <div class="widget widget_text text-center">
                 <img src="images/team/team-details.jpg" class="img-fullwidth" alt="">
               </div>
               <div class="widget widget_text text-center">
                 <div class="textwidget">
-                  <div class="section-typo-light bg-theme-colored1" style="width: 300px; height: 320px"> <img class="size-full wp-image-800 aligncenter object-fit-cover" src="{{ url('/storage/', $detail->avatar) }}" alt="" style="width: 100%; height:100%">
+                  <div class="section-typo-light bg-theme-colored1 w-100"> <img class="size-full wp-image-800 aligncenter object-fit-cover" src="{{ url('/storage/', $detail->avatar) }}" alt="" style="width: 100%; height:100%">
                   {{-- <h4>Online Help!</h4>
                   <h5>+(123) 456-78-90</h5> --}}
                   </div>

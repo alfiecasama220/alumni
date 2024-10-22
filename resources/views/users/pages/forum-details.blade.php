@@ -58,7 +58,13 @@
           <h6 class="text-error">{{ session('error') }}</h6>
         @endif
         
-        <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Comment here</h4>
+        
+        <div class="d-flex w-100 mb-3">
+          <div class="mr-3" style="width: 62px; height:62px; border-radius: 50%">
+            <img src="{{ url('/storage/', Auth::user()->avatar) }}" class="object-fit-contain" alt="" style="width: 100%; height: 100%; border-radius: 50%">
+          </div>
+          <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Comment here</h4>
+        </div>
         <form class="quick-contact-form" action="{{ route('forum-comments.store') }}" method="POST">
           @csrf
           <div class="form-group">

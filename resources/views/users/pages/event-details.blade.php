@@ -62,6 +62,10 @@
       
       <div class="col-md-7" >
 
+        @if($eventsComment->isEmpty())
+          <h5>No data found</h5>
+        @else
+
         @foreach($eventsComment as $comments)
           <div class="border-4px border-radius-6 mb-md-40 p-15 mt-4" id="comment{{ $comments->id }}">
             <div class="author-thumb d-flex align-items-center">
@@ -69,7 +73,7 @@
                 <img src="{{ url('/storage/', $comments->user->avatar) }}" class="object-fit-contain" alt="" style="width: 100%; height: 100%; border-radius: 50%">
               </div>
               <div>
-                <div>{{ $comments->user->firstname . " " . $comments->user->lastname }} <b>added a new comment @if(Auth::user()->id == $comments->user_id)  (You) @endif</b></div>
+                <div>{{ $comments->user->firstname . " " . $comments->user->lastname }} <b>added a new comment @if(auth()->check()) @if(Auth::user()->id == $comments->user_id)  (You) @endif @endif</b></div>
                 <div><span class="mb-10 text-gray-darkgray mr-10 font-size-13"><i class="far fa-calendar-alt mr-10 text-theme-colored"></i> {{ $comments->created_at }}</span></div>
               </div>
             </div>
@@ -79,6 +83,7 @@
             </div>
           </div>
         @endforeach
+        @endif
 
     </div>
 
@@ -91,7 +96,12 @@
           <h6 class="text-error">{{ session('error') }}</h6>
         @endif
         
-        <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Comment here</h4>
+        <div class="d-flex w-100 mb-3">
+          <div class="mr-3" style="width: 62px; height:62px; border-radius: 50%">
+            <img src="{{ url('/storage/', Auth::user()->avatar) }}" class="object-fit-contain" alt="" style="width: 100%; height: 100%; border-radius: 50%">
+          </div>
+          <h4 class="widget-title widget-title-line-bottom line-bottom-theme-colored1">Comment here</h4>
+        </div>
         <form class="quick-contact-form" action="{{ route('comments.store') }}" method="POST">
           @csrf
           <div class="form-group">

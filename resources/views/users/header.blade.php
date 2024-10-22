@@ -32,7 +32,7 @@
             <div class="row header-nav-col-row">
               <div class="col-sm-auto align-self-center">
                 <a class="menuzord-brand site-brand" href="index-mp-layout1.html">
-                  <img class="logo-default logo-1x" src="{{ asset('users/images/mdc-wide-small.png') }}" alt="Logo">
+                  <img class="logo-default logo-1x" src="{{ asset('users/images/logoUp.png') }}" alt="Logo">
                   <img class="logo-default logo-2x retina" src="{{ asset('users/images/mdc-wide-small.png') }}" alt="Logo">
                 </a>
               </div>
@@ -44,13 +44,14 @@
   
                     </li>
 
+                    @if(session('username'))
                     <li class="menu-item">
                         <a href="{{ route('showAlumnis') }}">Alumni's</a>
     
                       </li>
                     
                     
-                    @if(session('username'))
+                    
                       <li class="menu-item"><a href="javascript:void(0)">Event Jobs</a>
                         <ul class="dropdown">
         

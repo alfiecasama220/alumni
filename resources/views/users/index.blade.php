@@ -117,6 +117,8 @@
       </div>
     </section>
 
+
+    @if(auth()->check())
     <!-- Section: Team -->
     <section class="bg-white-f5">
       <div class="container">
@@ -143,7 +145,7 @@
                             <div class="icons-holder icons-holder-middle">
                               <div class="icons-holder-inner">
                                 <ul class="styled-icons icon-theme-colored1 icon-circled icon-xl">
-                                  <li><a class="styled-icons-item" target="_blank" href="{{ route('alumni.show', $alumnis->id) }}"><i class="fa fa-link"></i></a></li>
+                                  <li><a class="styled-icons-item" href="{{ route('alumniDetails', $alumnis->id) }}"><i class="fa fa-link"></i></a></li>
                                 </ul>
                               </div>
                             </div>
@@ -188,7 +190,7 @@
         </div>
       </div>
     </section>
-
+    @endif
   </div>
   <!-- end main-content -->
 
