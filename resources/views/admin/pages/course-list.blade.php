@@ -84,7 +84,7 @@
                           </td> --}}
                           <td> {{ $courses->course }} </td>
                           <td>
-                              <a type="button" class="btn btn-primary btn-fw">Edit</a>
+                              {{-- <a type="button" class="btn btn-primary btn-fw">Edit</a> --}}
                               <a type="button" class="btn btn-danger btn-fw">Delete</a>
                           </td>   
                         </tr>

@@ -76,7 +76,7 @@
                     </div>
                 </form>
                 <div class="text-center mt-2 mb-5">
-                    <a href="{{ route('admin.index') }}">Login</a>
+                    <a href="{{ route('login') }}">Login</a>
                 </div>
                     {{-- <div class="text-center mt-2">
                         <span class="toggle-mode">Switch to Light Mode</span>

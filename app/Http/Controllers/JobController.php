@@ -7,20 +7,20 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Forum;
-use App\Models\ForumComment;
+use App\Models\Job;
+use App\Models\JobComment;
 
 use Illuminate\Http\Request;
 
-class ForumController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $forums = Forum::all();
-        return view('users.pages.forum-list', compact('forums'));
+        $forums = Job::all();   
+       return view('users.pages.job-list', compact('forums'));
     }
 
     /**
@@ -42,13 +42,15 @@ class ForumController extends Controller
         ]);
 
         if($validator->passes()) {
-            $forum = new Forum();
+            $forum = new Job();
 
             $forum->title = $request->title;
             $forum->description = $request->description;
             $forum->save();
 
-            return redirect()->back()->with('success', "Forum added");
+            return redirect()->back()->with('success', "Job added");
+        } else {
+            return redirect()->back()->with('error', "Job not added");
         }
     }
 
@@ -57,13 +59,13 @@ class ForumController extends Controller
      */
     public function show(string $id)
     {
-        $forumDetails = Forum::all()->where('id', $id);
+        $forumDetails = Job::all()->where('id', $id);
         foreach($forumDetails as $details) {
             $details;
         }
 
-        $forumComments = ForumComment::with('user')->where('forum_id', $id)->get();
-        return view('users.pages.forum-details', compact('details', 'forumComments'));
+        $forumComments = JobComment::with('user')->where('job_id', $id)->get();
+        return view('users.pages.job-list-details', compact('details', 'forumComments'));
     }
 
     /**

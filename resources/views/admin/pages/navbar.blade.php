@@ -27,9 +27,9 @@
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-            <h6 class="p-3 mb-0">Profile</h6>
+            <h6 class="p-3 mb-0">Option</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
+            {{-- <a class="dropdown-item preview-item">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-cog text-success"></i>
@@ -38,7 +38,7 @@
               <div class="preview-item-content">
                 <p class="preview-subject mb-1">Settings</p>
               </div>
-            </a>
+            </a> --}}
             <div class="dropdown-divider"></div>
             <a class="dropdown-item preview-item" href="{{ route('adminLogout') }}">
               <div class="preview-thumbnail">

@@ -12,6 +12,8 @@ use App\Http\Controllers\EventCommentController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ForumCommentController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobCommentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -55,6 +57,12 @@ Route::middleware('userAuth')->group(function () {
 
     // FORUM COMMENTS
     Route::resource('forums/forum-comments', ForumCommentController::class);
+
+    // JOB LIST
+    Route::resource('/job', JobController::class);
+
+    // JOB COMMENT
+    Route::resource('/job/job-details', JobCommentController::class);
 
     // ALUMNI LIST USER
     Route::get('/pages/alumni/{id}', [AlumniController::class, 'show'])->name('alumniDetails');

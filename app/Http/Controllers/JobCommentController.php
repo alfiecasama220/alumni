@@ -7,20 +7,19 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Forum;
-use App\Models\ForumComment;
+use App\Models\Job;
+use App\Models\JobComment;
 
 use Illuminate\Http\Request;
 
-class ForumController extends Controller
+class JobCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $forums = Forum::all();
-        return view('users.pages.forum-list', compact('forums'));
+        //
     }
 
     /**
@@ -36,19 +35,29 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'description' => 'required'
+        $Validator = Validator::make($request->all(), [
+            'forum_id' => 'required',
+            'comments' => 'required',
+            'user_id' => 'required',
         ]);
 
-        if($validator->passes()) {
-            $forum = new Forum();
+        if($Validator->passes()) {
+            $forumComment = new JobComment();
 
-            $forum->title = $request->title;
-            $forum->description = $request->description;
-            $forum->save();
+            $forumComment->job_id = $request->forum_id;
+            $forumComment->comments = $request->comments;
+            $forumComment->user_id = $request->user_id;
+            $forumComment->save();
 
-            return redirect()->back()->with('success', "Forum added");
+            $commentID = JobComment::all()->where('user_id', $request->user_id);
+            foreach($commentID as $comID) {
+                $comID->id;
+            }
+            $url = route('job.show' , $request->forum_id);
+
+            return redirect($url . "/#comment" . $comID->id)->with('success', "Comment added");
+        } else {
+
         }
     }
 
@@ -57,13 +66,7 @@ class ForumController extends Controller
      */
     public function show(string $id)
     {
-        $forumDetails = Forum::all()->where('id', $id);
-        foreach($forumDetails as $details) {
-            $details;
-        }
-
-        $forumComments = ForumComment::with('user')->where('forum_id', $id)->get();
-        return view('users.pages.forum-details', compact('details', 'forumComments'));
+        //
     }
 
     /**

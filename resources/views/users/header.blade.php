@@ -55,7 +55,7 @@
                       <li class="menu-item"><a href="javascript:void(0)">Event Jobs</a>
                         <ul class="dropdown">
         
-                          <li><a href="news-timeline.html">Jobs</a></li>
+                          <li><a href="{{ route('job.index') }}">Jobs</a></li>
                           <li><a href="{{ route('forums.index') }}">Forums</a></li>
                         </ul>
                       </li>

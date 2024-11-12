@@ -97,7 +97,7 @@
             <div class="row">
               <div class="form-group col-md-12">
                 <label for="form_choose_password">Choose Password</label>
-                <input id="form_choose_password" name="password" class="form-control" type="text">
+                <input type="password" id="form_choose_password" name="password" class="form-control" type="text">
               </div>
             </div>
             <div class="form-check">

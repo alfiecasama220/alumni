@@ -85,7 +85,7 @@ class AdminController extends Controller
             $users->role = $request->role;
             $users->save();
             
-            return redirect()->intended(route('admin.index'))->with('success', Session::get('registerSuccess'));
+            return redirect()->intended(route('login'))->with('success', Session::get('registerSuccess'));
             
         } else {
             return redirect()->back()->with('error', Session::get('registerFailed'));
