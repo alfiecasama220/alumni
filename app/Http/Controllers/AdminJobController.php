@@ -6,35 +6,24 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 use App\Models\Course;
 use App\Models\User;
+
 use App\Models\Job;
-use App\Models\Forum;
-use App\Models\Event;
+use App\Models\JobComment;
 
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AdminJobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $alumni = User::all()->where('role', 'client')->count();
-        $jobs = Job::all()->count();
-        $forum = Forum::all()->count();
-        $events = Event::where(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"), '>=' , DB::raw('CURDATE()'))->orderBy(DB::raw("STR_TO_DATE(date, '%d-%b-%Y')"))->count();
-        
-        $datas = [
-            ['name' => 'Alumni', 'value' => $alumni],
-            ['name' => 'Jobs', 'value' => $jobs],
-            ['name' => 'Forums', 'value' => $forum],
-            ['name' => 'Upcoming Events', 'value' => $events],
-        ];  
-        return view('admin.pages.dashboard', compact('datas'));
+        $job = Job::paginate(7);
+        return view('admin.pages.job-list', compact('job'));
     }
 
     /**

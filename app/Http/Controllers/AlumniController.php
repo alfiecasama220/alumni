@@ -32,6 +32,28 @@ class AlumniController extends Controller
         return view('admin.pages.alumni-list', compact('alumni'));
     }
 
+    public function filter(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'status' => 'required',
+        ]);
+
+        $alumni = User::with('course')->where('is_working', $request->status)->where('role', 'client')->paginate(7);
+
+        if($request->status == 1 || $request->status == 0) {
+            if($validator->passes()) {
+                return view('admin.pages.alumni-list', compact('alumni'));
+            } 
+        } else {
+            return redirect()->intended(route('alumni.create'));
+        }
+
+        
+
+        // $alumni = User::with('course')->where('role', 'client')->paginate(7);
+        // return view('admin.pages.alumni-list', compact('alumni'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -43,7 +65,7 @@ class AlumniController extends Controller
             'lastname' => 'required',
             'gender' => 'required',
             'batch' => 'required',
-            'occupation' => 'required',
+            'occupation' => 'nullable',
             'course' => 'required',
             'currently' => 'required',
             'avatar' => 'required|file|max:7020',

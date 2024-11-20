@@ -14,6 +14,8 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ForumCommentController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobCommentController;
+use App\Http\Controllers\AdminForumController;
+use App\Http\Controllers\AdminJobController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -32,6 +34,12 @@ Route::middleware('auth')->group(function () {
 
     // COURSE
     Route::resource('/admin/pages/course', CourseController::class);
+
+    // FORUMS
+    Route::resource('/admin/pages/forum', AdminForumController::class);
+
+    // JOBS
+    Route::resource('/admin/pages/jobs', AdminJobController::class);
     
     // ALUMNI LIST
     Route::resource('/admin/pages/alumni', AlumniController::class);
@@ -39,6 +47,9 @@ Route::middleware('auth')->group(function () {
     // ALUMNI LIST APPROVAL
     Route::patch('/admin/pages/alumni/alumni-approve/{id}', [AlumniController::class, 'approve'])->name('approve');
     // Route::patch('/admin/pages/alumni/alumni-reject/{id}', [AlumniController::class, 'reject'])->name('reject');
+
+    // FILTER
+    Route::post('/admin/pages/alumni/alumni-filter', [AlumniController::class, 'filter'])->name('filter');
 
     // EVENT
     Route::resource('/admin/pages/event', EventController::class);

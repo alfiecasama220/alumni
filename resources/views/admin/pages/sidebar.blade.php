@@ -17,7 +17,7 @@
               <span class="text-center w">{{  Str::ucfirst(Auth::user()->role) }}</span>
             </div>
           </div>
-          <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+          {{-- <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
           <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
             <a href="#" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
@@ -52,7 +52,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> --}}
       </li>
       <li class="nav-item nav-category">
         <span class="nav-link">Navigation</span>
@@ -93,7 +93,7 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/charts/chartjs.html">
+        <a class="nav-link" href="{{ route('jobs.index') }}">
           <span class="menu-icon">
             <i class="mdi mdi-weight"></i>
           </span>
@@ -111,7 +111,7 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+        <a class="nav-link" href="{{ route('forum.index') }}">
           <span class="menu-icon">
             <i class="mdi mdi-forum"></i>
           </span>
