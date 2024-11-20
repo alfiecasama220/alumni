@@ -119,14 +119,14 @@
           <i class="menu-arrow"></i>
         </a>
       </li>
-      <li class="nav-item menu-items">
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" href="{{ url('/storage/', Auth::user()->avatar) }}">
           <span class="menu-icon">
             <i class="mdi mdi-account"></i>
           </span>
           <span class="menu-title">Users</span>
         </a>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item menu-items">
         <a class="nav-link" href="docs/documentation.html">
           <span class="menu-icon">
