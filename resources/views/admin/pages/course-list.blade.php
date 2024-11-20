@@ -85,7 +85,12 @@
                           <td> {{ $courses->course }} </td>
                           <td>
                               {{-- <a type="button" class="btn btn-primary btn-fw">Edit</a> --}}
-                              <a type="button" class="btn btn-danger btn-fw">Delete</a>
+                              <form action="{{ route('course.destroy', $courses->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-fw">Delete</button>
+                              </form>
+                              
                           </td>   
                         </tr>
                         @endforeach

@@ -80,6 +80,14 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $id = Gallery::findOrFail($id);
+
+        $id->delete();
+
+        if($id) {
+            return redirect()->back()->With('success', 'The data is deleted');
+        } else {
+            return redirect()->back()->With('error', 'The data is not deleted');
+        }
     }
 }

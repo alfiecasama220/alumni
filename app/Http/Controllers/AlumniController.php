@@ -199,7 +199,15 @@ class AlumniController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $id = User::findOrFail($id);
+
+        $id->delete();
+
+        if($id) {
+            return redirect()->back()->with('success', 'User deleted Successfully');
+        } else {
+            return redirect()->back()->with('error', 'User not deleted');
+        }
     }
 
     public function logout() {

@@ -77,7 +77,11 @@
                           <td> {{ $jobs->title }} </td>
                           <td> {{ $jobs->description }} </td>
                           <td>
-                              <a type="button" class="btn btn-danger btn-fw">Delete</a>
+                              <form action="{{ route('jobs.destroy', $jobs->id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button class="btn btn-danger btn-fw">Delete</button>
+                              </form>
                           </td>   
                         </tr>
                         @endforeach

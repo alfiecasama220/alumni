@@ -77,7 +77,11 @@
                           <td> {{ $forums->title }} </td>
                           <td> {{ $forums->description }} </td>
                           <td>
-                              <a type="button" class="btn btn-danger btn-fw">Delete</a>
+                              <form action="{{ route('forum.destroy', $forums->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                  <button class="btn btn-danger btn-fw">Delete</button>
+                              </form>
                           </td>   
                         </tr>
                         @endforeach
